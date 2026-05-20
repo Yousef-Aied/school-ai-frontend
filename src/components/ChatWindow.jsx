@@ -24,7 +24,7 @@ export default function ChatWindow({ conversation, onSend, onGenerateQuiz }) {
 
       <div className="messageList" ref={listRef}>
         {conversation.messages.length === 0 ? (
-          <div className="emptyState">
+          <div className="emptyState" style={{ textAlign: "center", color: "#ffffff" }}>
             <h2>Study Explainer</h2>
             <p>Ask anything from your PDFs.</p>
           </div>
