@@ -1,7 +1,7 @@
 // API wrapper (connects to BackIndex)
 // http://localhost:8000 DOTNET_BASE 
 
-const API = import.meta.env.VITE_API_URL || "https://ai-service-pj5r.onrender.com";
+const API = import.meta.env.VITE_API_URL; // FastAPI
 
 export async function sendMessage({conversationId, message, grade, subject, studentId = 1, studentName}) {
   const res = await fetch(`${API}/api/chat`, {
@@ -94,7 +94,7 @@ export async function getQuiz(quizId) {
 // ===============================
 // const DOTNET_BASE = "https://localhost:7265"; // .NET Swagger
 
-const DOTNET_BASE = API; //.NET  Render
+const DOTNET_BASE = import.meta.env.VITE_DOTNET_URL; // .NET
 
 // Teacher Dashboard API
 export async function getTeacherDashboard(teacherId) {
