@@ -1,16 +1,16 @@
 // API wrapper (connects to BackIndex)
 // http://localhost:8000 DOTNET_BASE 
 
-const API = import.meta.env.VITE_API_URL;
+const API = import.meta.env.VITE_API_URL || "https://ai-service-pj5r.onrender.com";
 
 export async function sendMessage({conversationId, message, grade, subject, studentId = 1, studentName}) {
-  const res = await fetch("https://ai-service-pj5r.onrender.com/api/chat", {
+  const res = await fetch(`${API}/api/chat`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       conversation_id: conversationId,
       message,
-      student_id: studentId, //send it so that it knows the backend and which profile to open
+      student_id: studentId, //send it so that it knows the backend and which profile to open 
       student_name: studentName,
       grade,
       subject,
@@ -23,7 +23,7 @@ export async function sendMessage({conversationId, message, grade, subject, stud
 
 // Analysis API 
 export async function analyzeChat(studentId, conversationId, messages, grade, subject) {
-  const res = await fetch("https://ai-service-pj5r.onrender.com/api/analyze-chat", {
+  const res = await fetch(`${API}/api/analyze-chat`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -46,7 +46,7 @@ export async function analyzeChat(studentId, conversationId, messages, grade, su
 
 // Quiz API payload
 export async function generateQuiz({ studentId, conversationId, nQuestions = 10, topic, grade, subject }) {
-  const res = await fetch("https://ai-service-pj5r.onrender.com/api/quiz/generate", {
+  const res = await fetch(`${API}/api/quiz/generate`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -64,7 +64,7 @@ export async function generateQuiz({ studentId, conversationId, nQuestions = 10,
 }
 
 export async function submitQuiz({ quizId, studentId, answers }) {
-  const res = await fetch("https://ai-service-pj5r.onrender.com/api/quiz/submit", {
+  const res = await fetch(`${API}/api/quiz/submit`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -80,7 +80,7 @@ export async function submitQuiz({ quizId, studentId, answers }) {
 
 // Add fetch if state is not available
 export async function getQuiz(quizId) {
-  const res = await fetch(`https://ai-service-pj5r.onrender.com/api/quiz/${quizId}`);
+  const res = await fetch(`${API}/api/quiz/${quizId}`);
   if (!res.ok) throw new Error(await res.text());
   return await res.json();
 }
