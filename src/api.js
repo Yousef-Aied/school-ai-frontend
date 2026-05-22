@@ -1,10 +1,11 @@
 // API wrapper (connects to BackIndex)
 // http://localhost:8000 DOTNET_BASE 
 
-const API = import.meta.env.VITE_DOTNET_URL; // FastAPI
+const API = import.meta.env.VITE_API_URL;  //  AI (FastAPI)
+const DOTNET_BASE = import.meta.env.VITE_DOTNET_URL; // .NET
 
 export async function sendMessage({conversationId, message, grade, subject, studentId = 1, studentName}) {
-  const res = await fetch(`${API}/api/chat`, {
+  const res = await fetch(`${DOTNET_BASE}/api/chat`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -86,15 +87,11 @@ export async function getQuiz(quizId) {
 }
 
 
-
-console.log(import.meta.env.VITE_DOTNET_URL)
-
 // ===============================
 // .NET API (Teacher Dashboard)
 // ===============================
 // const DOTNET_BASE = "https://localhost:7265"; // .NET Swagger
 
-const DOTNET_BASE = import.meta.env.VITE_DOTNET_URL; // .NET
 
 // Teacher Dashboard API
 export async function getTeacherDashboard(teacherId) {
@@ -175,3 +172,6 @@ export async function submitStudentQuizAssignment(studentQuizAssignmentId, answe
   if (!res.ok) throw new Error(await res.text());
   return await res.json();
 }
+
+console.log("API:", import.meta.env.VITE_API_URL);
+console.log("DOTNET:", import.meta.env.VITE_DOTNET_URL);
