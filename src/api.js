@@ -13,7 +13,7 @@ export async function sendMessage({conversationId, message, grade, subject, stud
       message,
       student_id: studentId, //send it so that it knows the backend and which profile to open 
       student_name: studentName,
-      grade: String(grade),
+      grade,
       subject,
     }),
   });
