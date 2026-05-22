@@ -118,7 +118,8 @@ export async function generateTeacherPredictions(teacherId) {
   return await res.json(); // { processed, skippedNoMetrics, aiFailed }
 }
 
-
+console.log("DOTNET URL:", import.meta.env.VITE_DOTNET_URL);
+console.log("API URL:", import.meta.env.VITE_API_URL);
 // ===============================
 // createTeacherQuizAssignment API
 export async function createTeacherQuizAssignment(teacherId, payload) {
