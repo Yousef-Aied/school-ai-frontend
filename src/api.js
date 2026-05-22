@@ -1,7 +1,7 @@
 // API wrapper (connects to BackIndex)
 // http://localhost:8000 DOTNET_BASE 
 
-const API = import.meta.env.VITE_API_URL; // FastAPI
+const API = import.meta.env.VITE_DOTNET_URL; // FastAPI
 
 export async function sendMessage({conversationId, message, grade, subject, studentId = 1, studentName}) {
   const res = await fetch(`${API}/api/chat`, {
@@ -87,7 +87,7 @@ export async function getQuiz(quizId) {
 
 
 
-
+console.log(import.meta.env.VITE_DOTNET_URL)
 
 // ===============================
 // .NET API (Teacher Dashboard)
@@ -118,8 +118,7 @@ export async function generateTeacherPredictions(teacherId) {
   return await res.json(); // { processed, skippedNoMetrics, aiFailed }
 }
 
-console.log("DOTNET URL:", import.meta.env.VITE_DOTNET_URL);
-console.log("API URL:", import.meta.env.VITE_API_URL);
+
 // ===============================
 // createTeacherQuizAssignment API
 export async function createTeacherQuizAssignment(teacherId, payload) {
