@@ -152,6 +152,8 @@ export default function Chat() {
         grade,
         subject,
       });
+
+      console.log("CHAT RESPONSE:", data);
       const answer = data.answer ?? "";
 
       setConversations((prev) =>
@@ -204,6 +206,7 @@ export default function Chat() {
         console.error("Analysis background task failed:", err);
       }
     } catch (e) {
+      console.error("CHAT ERROR:", e);
       setConversations((prev) =>
         prev.map((c) =>
           c.id === activeConversation.id
@@ -253,6 +256,7 @@ export default function Chat() {
         },
       });
     } catch (e) {
+      console.error("CHAT ERROR:", e);
       alert(e.message || "Failed to generate quiz");
     }
   }
