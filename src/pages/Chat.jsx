@@ -230,7 +230,7 @@ export default function Chat() {
 
   async function onGenerateQuiz() {
     try {
-      // const studentId = 1; // Later from auth
+      // const studentId = 1; // Later from auth 
       const conversationId = activeConversation?.id ?? null;
 
       // As a starting point, we'll make it smart later

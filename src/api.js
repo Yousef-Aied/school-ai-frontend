@@ -2,7 +2,7 @@
 // http://localhost:8000 DOTNET_BASE 
 
 const API = import.meta.env.VITE_API_URL;  //  AI (FastAPI)
-const DOTNET_BASE = import.meta.env.VITE_DOTNET_URL; // .NET
+const DOTNET_BASE = import.meta.env.VITE_DOTNET_URL; // .NET 
 
 export async function sendMessage({conversationId, message, grade, subject, studentId = 1, studentName}) {
   const res = await fetch(`${DOTNET_BASE}/api/chat`, {
