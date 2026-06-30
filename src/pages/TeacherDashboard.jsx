@@ -170,7 +170,7 @@ export default function TeacherDashboard() {
     setQuizError("");
     setQuizMessage("");
 
-    // ✅ Validation
+    // Validation
     if (!quizForm.units.length) {
       setQuizError("Please select at least one unit");
       setQuizLoading(false);

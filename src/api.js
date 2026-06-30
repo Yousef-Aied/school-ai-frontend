@@ -173,5 +173,13 @@ export async function submitStudentQuizAssignment(studentQuizAssignmentId, answe
   return await res.json();
 }
 
-console.log("API:", import.meta.env.VITE_API_URL);
-console.log("DOTNET:", import.meta.env.VITE_DOTNET_URL);
+// ===============================
+// Study Plan Agent API 
+// ===============================
+export async function getStudyPlan(studentId) {
+  const res = await fetch(`${API}/api/agent/study-plan?student_id=${studentId}`);
+
+  if (!res.ok) throw new Error(await res.text());
+
+  return await res.json(); // plan
+}

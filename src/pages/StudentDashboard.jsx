@@ -19,9 +19,10 @@ import {
   CircleCheckBig,
 } from "lucide-react";
 
-import { getStudentDashboard, getStudentQuizAssignments } from "../api";
+import { getStudentDashboard, getStudentQuizAssignments, getStudyPlan } from "../api";
 import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
+
 
 import "./StudentDashboard.css";
 export default function StudentDashboard() {
@@ -31,6 +32,7 @@ export default function StudentDashboard() {
   const [data, setData] = useState(null);
   const [quizAssignments, setQuizAssignments] = useState([]);
   const [err, setErr] = useState("");
+  const [plan, setPlan] = useState(null);
 
   const navigate = useNavigate();
 
@@ -42,6 +44,12 @@ export default function StudentDashboard() {
     getStudentQuizAssignments(studentId)
       .then(setQuizAssignments)
       .catch((e) => console.log(e));
+  }, [studentId]);
+
+  useEffect(() => {
+  getStudyPlan(studentId)
+    .then(data => setPlan(data.plan))
+    .catch(err => console.log(err));
   }, [studentId]);
 
   const history = useMemo(() => data?.history ?? [], [data]);
@@ -325,6 +333,19 @@ export default function StudentDashboard() {
                 </div>
               </div>
             </div>
+
+            <h3>📚 Your Study Plan</h3>
+            {plan && Object.entries(plan).map(([day, tasks]) => (
+              <div key={day} style={{ marginBottom: "10px" }}>
+                <h4>{day.toUpperCase()}</h4>
+                <ul>
+                  {tasks.map((t, i) => (
+                    <li key={i}>{t}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+            
           </div>
         </div>
       </div>
