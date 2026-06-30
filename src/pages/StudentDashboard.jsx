@@ -19,10 +19,13 @@ import {
   CircleCheckBig,
 } from "lucide-react";
 
-import { getStudentDashboard, getStudentQuizAssignments, getStudyPlan } from "../api";
+import {
+  getStudentDashboard,
+  getStudentQuizAssignments,
+  getStudyPlan,
+} from "../api";
 import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
-
 
 import "./StudentDashboard.css";
 export default function StudentDashboard() {
@@ -47,9 +50,12 @@ export default function StudentDashboard() {
   }, [studentId]);
 
   useEffect(() => {
-  getStudyPlan(studentId)
-    .then(data => setPlan(data.plan))
-    .catch(err => console.log(err));
+    getStudyPlan(studentId)
+      .then((data) => {
+        console.log("STUDY PLAN RESPONSE:", data);
+        setPlan(data.plan);
+      })
+      .catch((err) => console.log(err));
   }, [studentId]);
 
   const history = useMemo(() => data?.history ?? [], [data]);
@@ -334,18 +340,36 @@ export default function StudentDashboard() {
               </div>
             </div>
 
-            <h3>📚 Your Study Plan</h3>
-            {plan && Object.entries(plan).map(([day, tasks]) => (
-              <div key={day} style={{ marginBottom: "10px" }}>
-                <h4>{day.toUpperCase()}</h4>
-                <ul>
-                  {tasks.map((t, i) => (
-                    <li key={i}>{t}</li>
+            <div className="sd-card">
+              <div className="sd-card-header">
+                <h3>📚 Your Study Plan</h3>
+
+                {plan &&
+                  plan.map((dayItem, idx) => (
+                    <div key={idx} style={{ marginBottom: "10px" }}>
+                      <h4>{dayItem.day}</h4>
+
+                      <div>
+                        <strong>Topics:</strong>
+                        <ul>
+                          {dayItem.topics?.map((t, i) => (
+                            <li key={i}>{t}</li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div>
+                        <strong>Tasks:</strong>
+                        <ul>
+                          {dayItem.tasks?.map((t, i) => (
+                            <li key={i}>{t}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
                   ))}
-                </ul>
               </div>
-            ))}
-            
+            </div>
           </div>
         </div>
       </div>
