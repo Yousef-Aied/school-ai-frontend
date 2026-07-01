@@ -18,7 +18,7 @@ import {
   Clock3,
   CircleCheckBig,
 } from "lucide-react";
-getStudyPlan
+getStudyPlan;
 import {
   getStudentDashboard,
   getStudentQuizAssignments,
@@ -350,14 +350,19 @@ export default function StudentDashboard() {
             <div className="sd-card">
               <div className="sd-card-header">
                 <h3>📚 Your Study Plan</h3>
+              </div>
 
-                {plan &&
-                  plan.map((dayItem, idx) => (
-                    <div key={idx} style={{ marginBottom: "10px" }}>
+              {plan && (
+                <div className="study-plan-grid">
+                  {plan.map((dayItem, idx) => (
+                    <div
+                      key={idx}
+                      className={`study-day-card level-${data.prediction?.level?.toLowerCase()}`}
+                    >
                       <h4>{dayItem.day}</h4>
 
-                      <div>
-                        <strong>Topics:</strong>
+                      <div className="study-section">
+                        <strong>📘 Topics</strong>
                         <ul>
                           {dayItem.topics?.map((t, i) => (
                             <li key={i}>{t}</li>
@@ -365,8 +370,8 @@ export default function StudentDashboard() {
                         </ul>
                       </div>
 
-                      <div>
-                        <strong>Tasks:</strong>
+                      <div className="study-section">
+                        <strong>📝 Tasks</strong>
                         <ul>
                           {dayItem.tasks?.map((t, i) => (
                             <li key={i}>{t}</li>
@@ -375,7 +380,8 @@ export default function StudentDashboard() {
                       </div>
                     </div>
                   ))}
-              </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

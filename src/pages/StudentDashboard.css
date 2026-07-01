@@ -500,6 +500,52 @@ body {
 }
 
 
+/* Study Plan */
+.study-plan-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.study-day-card {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 12px 14px;
+  border: 1px solid #e2e8f0;
+  transition: 0.2s;
+}
+
+.study-day-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+.study-day-card h4 {
+  margin-bottom: 6px;
+  color: #0f9ba8;
+}
+
+.study-section {
+  margin-top: 6px;
+}
+
+.study-section ul {
+  margin: 4px 0 0 16px;
+  padding: 0;
+}
+.level-weak {
+  border-left: 4px solid #ef4444;
+}
+
+.level-medium {
+  border-left: 4px solid #f59e0b;
+}
+
+.level-strong {
+  border-left: 4px solid #10b981;
+}
+
 @media (max-width: 1200px) {
   .sd-main-grid {
     grid-template-columns: 1fr;
