@@ -18,7 +18,7 @@ import {
   Clock3,
   CircleCheckBig,
 } from "lucide-react";
-
+getStudyPlan
 import {
   getStudentDashboard,
   getStudentQuizAssignments,
@@ -50,13 +50,20 @@ export default function StudentDashboard() {
   }, [studentId]);
 
   useEffect(() => {
-    getStudyPlan(studentId)
-      .then((data) => {
-        console.log("STUDY PLAN RESPONSE:", data);
-        setPlan(data.plan);
+    if (!data) return;
+
+    getStudyPlan({
+      level: data.prediction.level,
+      score: data.prediction.predictedScore,
+      study_hours: data.metrics.studyHours,
+      attendance: data.metrics.attendance,
+    })
+      .then((res) => {
+        console.log("PLAN:", res);
+        setPlan(res.plan);
       })
-      .catch((err) => console.log(err));
-  }, [studentId]);
+      .catch((err) => console.error("STUDY PLAN ERROR:", err));
+  }, [data]);
 
   const history = useMemo(() => data?.history ?? [], [data]);
 
