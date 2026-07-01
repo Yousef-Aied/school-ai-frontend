@@ -50,20 +50,13 @@ export default function StudentDashboard() {
   }, [studentId]);
 
   useEffect(() => {
-    if (!data) return;
-
-    getStudyPlan({
-      level: data.prediction.level,
-      score: data.prediction.predictedScore,
-      study_hours: data.metrics.studyHours,
-      attendance: data.metrics.attendance,
-    })
+    getStudyPlan(studentId)
       .then((res) => {
         console.log("PLAN:", res);
         setPlan(res.plan);
       })
       .catch((err) => console.error("STUDY PLAN ERROR:", err));
-  }, [data]);
+  }, [studentId]);
 
   const history = useMemo(() => data?.history ?? [], [data]);
 

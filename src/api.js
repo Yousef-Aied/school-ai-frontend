@@ -176,14 +176,17 @@ export async function submitStudentQuizAssignment(studentQuizAssignmentId, answe
 // ===============================
 // Study Plan Agent API 
 // ===============================
-export async function getStudyPlan(data) {
+export async function getStudyPlan(studentId) {
   const res = await fetch(`${API}/api/agent/study-plan`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify({
+      student_id: studentId,
+    }),
   });
 
   return await res.json();
 }
+
